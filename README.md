@@ -44,6 +44,7 @@ Technologies and tools used in this project
    ⚠️ Executed: /bin/sh
 
 
+🛡️ DevSecOps Defense Framework
 [ Linux Kernel Ring Buffer ]
            │
            │ Step 1: Intercept eBPF/Syscalls
