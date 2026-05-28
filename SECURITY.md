@@ -1,7 +1,4 @@
-# Let's generate a highly detailed and structured SECURITY.md file for the project as requested.
-# It covers the vulnerability description, how it's detected automatically, and how it was fixed.
 
-security_content = """# 🛡️ SECURITY.md - Vulnerability Disclosure & Runtime Mitigation Report
 
 This security documentation details the specific architectural vulnerabilities identified within the cluster, the continuous automated mechanism deployed for its detection, and the layered mitigation strategy implemented to permanently secure the cloud-native infrastructure.
 
