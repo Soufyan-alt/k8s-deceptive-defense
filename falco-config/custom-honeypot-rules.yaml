@@ -1,0 +1,14 @@
+customRules:
+  honeypot_rules.yaml: |-
+    # تعريف القاعدة الأمنية للمصيدة
+    - rule: Unauthorized Shell Inside Honeypot
+      desc: Detects any shell spawn or interactive command execution inside the deception honeypot container.
+      condition: >
+        container.image.repository == "k8s-redis-honeypot" 
+        and spawned_process 
+        and proc.name in (shell_procs)
+      output: >
+        [CRITICAL] [DECEPTIVE-DEFENSE] Alert! Unauthorized shell spawned inside Honeypot Container 
+        (user=%user.name user_id=%user.uid process=%proc.name cmdline=%proc.cmdline container_id=%container.id image=%container.image.repository)
+      priority: CRITICAL
+      tags: [mitre_execution, k8s, deception, blue_team]

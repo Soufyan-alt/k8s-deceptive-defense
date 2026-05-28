@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-honeypot
+  labels:
+    app: redis-honeypot
+    tier: deception
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-honeypot
+  template:
+    metadata:
+      labels:
+        app: redis-honeypot
+    spec:
+      containers:
+      - name: honeypot
+        image: k8s-redis-honeypot:v1
+        imagePullPolicy: Never # لاستخدام الحاوية التي بنيناها محلياً فوراً
+        ports:
+        - containerPort: 6379
+        # تطبيق معايير أمنية صارمة لمنع الاختراق الجسيم
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 10001
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service # اسم مغرٍ جداً داخل الكلاستر لإغراء المهاجم
+  labels:
+    app: redis-honeypot
+spec:
+  ports:
+  - port: 6379
+    targetPort: 6379
+  selector:
+    app: redis-honeypot
+  type: ClusterIP
