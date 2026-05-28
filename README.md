@@ -42,3 +42,18 @@ Technologies and tools used in this project
            │ Step 3: Interactive Escape
            ▼
    ⚠️ Executed: /bin/sh
+
+
+[ Linux Kernel Ring Buffer ]
+           │
+           │ Step 1: Intercept eBPF/Syscalls
+           ▼
+[ Falco Runtime DaemonSet ]
+           │
+           │ Step 2: Match Rules Definition
+           ▼
+[ Custom Security Rules Engine ]
+           │
+           │ Step 3: Enforce Isolation
+           ▼
+   ✅ BLOCKED: Unauthorized Shell
